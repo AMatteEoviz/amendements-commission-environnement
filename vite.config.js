@@ -15,5 +15,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  base: '/amendements-commission-environnement/',
+  base: '/amendements-commission-environnement/index.html',
 })
