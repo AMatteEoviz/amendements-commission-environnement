@@ -15,5 +15,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  base: 'https://amatteeoviz.github.io/amendements-commission-environnement/',
+  base: '/amendements-commission-environnement/',
 })
