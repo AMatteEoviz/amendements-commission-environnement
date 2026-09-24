@@ -6,10 +6,9 @@ import { sendToSupabase } from './../supabase.js';
 
 const props = defineProps({
     scenario: {
-        type: Number,
+        type: Object,
         required: true
-    },
-    datas: Array,
+    }
 })
 
 const currUser = ref(null);
@@ -18,7 +17,7 @@ currUser.value = user
 
 let choix_NAT_AMEND;
 
-if(props.scenario !== 4) {
+if(props.scenario.id !== 4) {
     choix_NAT_AMEND = [
     "Amendement de scénario - SANS nouvelle option de vote",
     "Amendement de scénario - AVEC nouvelle option de vote"
@@ -34,7 +33,7 @@ const curr_NAT_AMEND = ref(choix_NAT_AMEND[0])
 const detailAmendement = ref({
     TITRE_AMEND: "",
     NAT_AMEND: "",
-    SCENARIO: props.scenario,
+    id_scenario: props.scenario.id,
     TEXTE_AMEND: "",
     JUSTIFICATION: "",
     RISQUE: "",
@@ -46,7 +45,7 @@ const detailAmendement = ref({
 const sendMessage = async () => {
 
     const data = await sendToSupabase(
-        'test_integration',
+        'amendements',
         detailAmendement.value
     );
 
@@ -58,18 +57,18 @@ const sendMessage = async () => {
 </script>
 
 <template>
-    <label :for="`modal-control_scenario_${scenario}`" class="modal-open">Ajouter un amendement pour ce scénario</label>
+    <label :for="`modal-control_scenario_${scenario.id}`" class="modal-open">Ajouter un amendement pour ce scénario</label>
 
     <Teleport to="body">
-        <input type="checkbox" :id="`modal-control_scenario_${scenario}`" class="modal">
+        <input type="checkbox" :id="`modal-control_scenario_${scenario.id}`" class="modal">
         <div>
             <div class="card modal-card">
-                <label :for="`modal-control_scenario_${scenario}`" class="modal-close" ></label>
+                <label :for="`modal-control_scenario_${scenario.id}`" class="modal-close" ></label>
                 <h3 class="section">
                     {{
-                        scenario === 4 ?
+                        scenario.SCENARIO_CODE === 0 ?
                             "Proposer un amendement hors scénario"
-                            :`Proposer un amendement pour le scénario ${scenario}`
+                            :`Proposer un amendement pour le scénario ${scenario.SCENARIO_CODE}`
                     }}
                 </h3>
                 <form @submit.prevent="sendMessage">

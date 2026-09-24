@@ -1,11 +1,11 @@
 <script setup>
 
-    import { ref } from 'vue';
+    import { onMounted, ref } from 'vue';
     import { useAuth } from '@/composables/useAuth';
+    import { getFromSupabase } from '../supabase.js';
 
     const props = defineProps({
-        scenario: Number,
-        datas: Array
+        scenario: Text,
     });
 
     const currUser = ref(null);
@@ -15,12 +15,15 @@
 
     const amendements = ref(null);
 
-    amendements.value = props.datas.filter(d => d.SCENARIO == props.scenario)
+    onMounted(async () => {
+        const datas = await getFromSupabase('amendements');
+        amendements.value = datas.filter(d => d.id_scenario == props.scenario);
+    });
 
 </script>
 
 <template>
-    <ul>
+    <ul v-if="amendements">
         <li v-for="amendement in amendements">
             <div class="amend-row">
                 <strong>{{ amendement.TITRE_AMEND }}</strong>

@@ -5,17 +5,16 @@
     import addAmendement from './addAmendement.vue';
     import { getFromSupabase } from '../supabase.js';
 
-    const datas = ref(null);
+    const scenarios = ref(null);
     const uniqueScenari = ref([]);
     
 
     onMounted(async () => {
-      datas.value = await getFromSupabase('test_integration');
-      console.log(datas.value)
-      datas.value.map(d => {
-          let ScenarioToPush = d.SCENARIO ? d.SCENARIO:4;
+      scenarios.value = await getFromSupabase('scenarios');
+      scenarios.value.map(d => {
+          let ScenarioToPush = d;
           if(!uniqueScenari.value.includes(ScenarioToPush)) {
-              uniqueScenari.value.push(ScenarioToPush)
+              uniqueScenari.value.push(d)
               uniqueScenari.value.sort()
           }
       });
@@ -26,28 +25,28 @@
 
 <template>
 
-  <div class="spinner-container" v-if="!datas">
+  <div class="spinner-container" v-if="!scenarios">
     <div class="spinner primary"></div>  
   </div>
 
 <div v-else class="collapse">
- <template v-for="i in uniqueScenari" :key="i">
+ <template v-for="i in uniqueScenari" :key="i.SCENARIO_CODE">
     <input
       type="checkbox"
-      :id="`collapse-section${i}`"
-      :checked="i === 1"
+      :id="`collapse-section${i.SCENARIO_CODE}`"
+      :checked="i.SCENARIO_CODE === 1"
       aria-hidden="true"
     >
 
     <label
-      :for="`collapse-section${i}`"
+      :for="`collapse-section${i.SCENARIO_CODE}`"
       aria-hidden="true"
     >
-       {{i===4 ? "Amendements hors scénario":`Scénario ${i}` }}
+       {{ i.SCENARIO_TITRE }}
     </label>
     <div>
-      <addAmendement :scenario="i" :datas="datas" />
-      <amendementContainer :scenario="i" :datas="datas" />
+      <addAmendement :scenario="i" />
+      <amendementContainer :scenario="i.id" />
     </div>
   </template>
 </div>
