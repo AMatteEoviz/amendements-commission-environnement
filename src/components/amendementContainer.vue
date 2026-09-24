@@ -27,7 +27,7 @@
         <li v-for="amendement in amendements">
             <div class="amend-row">
                 <strong>{{ amendement.TITRE_AMEND }}</strong>
-                <label :for="`modal-control_${amendement.id}`" class="modal-open">En savoir plus</label>
+                <label :for="`modal-control_${amendement.id}`" class="modal-open">Voir l'amendement</label>
                     <!-- Pour modifier ses amendements. Un peu la flemme pour l'instant.
                     <span v-if="amendement.user_id === currUser.id" class="icon-settings" style="padding: .1em; background-repeat: no-repeat;"></span>
                     <span v-else style="min-width:1.2em"></span> -->

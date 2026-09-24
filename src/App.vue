@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue';
 import { getFromSupabase } from './supabase.js';
 
 import scenarioContainer from './components/ScenarioContainer.vue';
-import blablaDeGaucho from './components/blablaDeGaucho.vue';
+import Header from './components/header.vue';
 
 // Gestion de la session
 import { useAuth } from './composables/useAuth.js';
@@ -26,7 +26,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <blablaDeGaucho />
+  <Header />
   <div v-if="loading">
     <div class="spinner primary"></div>  
   </div>

@@ -34,7 +34,6 @@
     <input
       type="checkbox"
       :id="`collapse-section${i.SCENARIO_CODE}`"
-      :checked="i.SCENARIO_CODE === 1"
       aria-hidden="true"
     >
 
@@ -43,6 +42,7 @@
       aria-hidden="true"
     >
        {{i.SCENARIO_CODE !== 0 ? `Scénario ${i.SCENARIO_CODE} : ${i.SCENARIO_TITRE}`:"Amendements hors scénario" }}
+       <a v-if="i.SCENARIO_CODE !==0" :href="`/amendements-commission-environnement/scenarios_pdf/scenario_${i.SCENARIO_CODE}.pdf`">Lire le contenu du scénario</a>
     </label>
     <div>
       <addAmendement :scenario="i" />
@@ -59,6 +59,7 @@
   .collapse {
     width: 60%;
     margin: auto;
+    margin-bottom: 5%;
   }
 
   .collapse div {
