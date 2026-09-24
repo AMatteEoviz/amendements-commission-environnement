@@ -33,7 +33,7 @@ async function logIn() {
 
   <div v-show="!SignMod">
     <section class="auth-container">
-      <h1>Connexion</h1>
+        <h1>Connexion</h1>
 
       <form @submit.prevent="logIn">
         <div>
@@ -71,12 +71,23 @@ async function logIn() {
           {{ loading ? 'Connexion...' : 'Se connecter' }}
         </button>
       </form>
+          <button @click.prevent="SignMod=true">Créer mon compte</button>
+
     </section>
-    <button @click.prevent="SignMod=true">Créer un compte</button>
   </div>
 
   <div v-show="SignMod">
-      <SignIn />
-      <button @click.prevent="SignMod=false">Se connecter</button>
+      <SignIn @close="SignMod = false"/>
   </div>
 </template>
+
+
+<style scoped>
+  .auth-container {
+    width: min(150vw, 400px);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+</style>

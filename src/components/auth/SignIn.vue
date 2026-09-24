@@ -38,6 +38,8 @@ async function signIn() {
     loading.value = false
   }
 }
+
+  defineEmits(['close'])
 </script>
 
 <template>
@@ -84,5 +86,16 @@ async function signIn() {
         {{ loading ? 'Création...' : 'Créer mon compte' }}
       </button>
     </form>
+    <button @click="$emit('close')">
+      Se connecter
+    </button>
   </section>
 </template>
+
+
+<style scoped>
+  .auth-container {
+    max-width: 30%;
+    margin: 0 auto;
+  }
+</style>
