@@ -102,7 +102,7 @@
 
     .amend-row label {
         margin-right: 0;
-        width: 30%;
+        width: 20%;
         text-align: center;
     }
 

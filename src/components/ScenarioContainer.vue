@@ -42,7 +42,7 @@
       :for="`collapse-section${i.SCENARIO_CODE}`"
       aria-hidden="true"
     >
-       {{ i.SCENARIO_TITRE }}
+       {{i.SCENARIO_CODE !== 0 ? `Scénario ${i.SCENARIO_CODE} : ${i.SCENARIO_TITRE}`:"Amendements hors scénario" }}
     </label>
     <div>
       <addAmendement :scenario="i" />
@@ -57,7 +57,7 @@
 <style scoped>
 
   .collapse {
-    width: 50%;
+    width: 60%;
     margin: auto;
   }
 
