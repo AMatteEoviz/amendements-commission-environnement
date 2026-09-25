@@ -1,14 +1,13 @@
 <script setup>
 
 import { onMounted, ref } from 'vue';
-import { getFromSupabase } from './supabase.js';
 
 import scenarioContainer from './components/ScenarioContainer.vue';
 import Header from './components/header.vue';
 
 // Gestion de la session
 import { useAuth } from './composables/useAuth.js';
-import LogIn from './components/auth/LogIn.vue'
+import SignIn from './components/auth/SignIn.vue'
 import sessionManager from './components/auth/sessionManager.vue';
 
 const {
@@ -36,7 +35,7 @@ onMounted(async () => {
 
   </div>
   <div v-else>
-    <LogIn />
+    <SignIn />
   </div>
 
 </template>
