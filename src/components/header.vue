@@ -20,7 +20,10 @@
         <p>Le reste est précisé sur le formulaire.</p>
         <p>En cas de besoin, vous pouvez écrire à Julien Gros <i>(julien.gros@univ-tlse2.fr)</i> et Timothée Chabot <i>(timothee.chabot@univ-tlse2.fr)</i></p>
     </div>
-    <image id="colvert" src="https://st.depositphotos.com/1007514/2506/i/950/depositphotos_25067721-stock-photo-mallard-duck-with-clipping-path.jpg" />
+    <div id="cheeringDuck">
+        <image  src="https://st.depositphotos.com/1007514/2506/i/950/depositphotos_25067721-stock-photo-mallard-duck-with-clipping-path.jpg" />
+        <p>Merci pour votre contribution !</p>
+    </div>
 </template>
 
 <style scoped>
@@ -30,10 +33,16 @@
         margin: 0 auto;
     }
 
-    #colvert {
+    #cheeringDuck {
         position: absolute;
-        width: 75px;
-        top: 75px;
+        display: flex;
+        width: 200px;
+        top: 0;
         right: 0;
+        justify-content: center;
+        text-align: center;
+    }
+    #cheeringDuck img {
+        width: 75px;
     }
 </style>
