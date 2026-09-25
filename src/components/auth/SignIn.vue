@@ -7,6 +7,7 @@ const loading = ref(false)
 const error = ref('')
 const errorAdd = ref('')
 const success = ref(false)
+const loadingAnon = ref(false)
 
 async function signIn() {
   error.value = ''
@@ -36,6 +37,35 @@ async function signIn() {
     success.value = true
   } finally {
     loading.value = false
+  }
+}
+
+async function anonVisit() {
+  error.value = ''
+  errorAdd.value = ''
+  loadingAnon.value = true
+
+  try {
+    const {
+      data: { session }
+    } = await supabase.auth.getSession()
+
+    if (session) {
+      return
+    }
+
+    const { error: anonError } =
+      await supabase.auth.signInAnonymously()
+
+    if (anonError) {
+      error.value = 'Impossible de continuer sans connexion.'
+      console.error(anonError)
+      return
+    }
+
+    router.push('/')
+  } finally {
+    loadingAnon.value = false
   }
 }
 
@@ -73,6 +103,7 @@ async function signIn() {
         {{ loading ? 'Création...' : 'Recevoir le lien de confirmation' }}
       </button>
     </form>
+    <p class="SignAnon" @click="anonVisit">Visiter sans connexion</p>
   </section>
 </template>
 
@@ -82,4 +113,10 @@ async function signIn() {
     max-width: 30%;
     margin: 0 auto;
   }
+
+  .SignAnon:hover {
+    cursor: pointer;
+    color: #4dabf7;
+  }
 </style>
+

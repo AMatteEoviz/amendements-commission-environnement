@@ -11,13 +11,12 @@
             <li>un remaniement de la structure en trois scénarios ;</li>
             <li>un amendement à un scénario existant.</li>
         </ul>
-        <p>Dans ce second cas, une option vous permettra d'indiquer :
-            <ul>
-                <li>si vous créez un nouveau sous-scénario <i>(par exemple 2.d)</i> ;</li>
-                <li>si vous modifiez un sous-scénario existant ;</li>
-                <li>si votre amendement s'applique à toutes les sous-options du scénario.</li>
-            </ul>
-        </p>
+        <p>Dans ce second cas, une option vous permettra d'indiquer :</p>
+        <ul>
+            <li>si vous créez un nouveau sous-scénario <i>(par exemple 2.d)</i> ;</li>
+            <li>si vous modifiez un sous-scénario existant ;</li>
+            <li>si votre amendement s'applique à toutes les sous-options du scénario.</li>
+        </ul>
         <p>Le reste est précisé sur le formulaire.</p>
         <p>En cas de besoin, vous pouvez écrire à Julien Gros <i>(julien.gros@univ-tlse2.fr)</i> et Timothée Chabot <i>(timothee.chabot@univ-tlse2.fr)</i></p>
     </div>
