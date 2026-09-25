@@ -1,17 +1,11 @@
 <script setup>
 
     import { onMounted, ref } from 'vue';
-    import { useAuth } from '@/composables/useAuth';
     import { getFromSupabase } from '../supabase.js';
 
     const props = defineProps({
         scenario: Text,
     });
-
-    const currUser = ref(null);
-    const { user } = useAuth();
-    currUser.value = user._value
-    console.log(currUser.value)
 
     const amendements = ref(null);
 
@@ -28,9 +22,6 @@
             <div class="amend-row">
                 <strong>{{ amendement.TITRE_AMEND }}</strong>
                 <label :for="`modal-control_${amendement.id}`" class="modal-open">Voir l'amendement</label>
-                    <!-- Pour modifier ses amendements. Un peu la flemme pour l'instant.
-                    <span v-if="amendement.user_id === currUser.id" class="icon-settings" style="padding: .1em; background-repeat: no-repeat;"></span>
-                    <span v-else style="min-width:1.2em"></span> -->
             </div>
             <Teleport to="body">
                 <input type="checkbox" :id="`modal-control_${amendement.id}`" class="modal">

@@ -11,10 +11,6 @@ const props = defineProps({
     }
 });
 
-const currUser = ref(null);
-const { user } = useAuth();
-currUser.value = user;
-
 let choix_NAT_AMEND;
 
 if(props.scenario.SCENARIO_CODE !== 0) {
@@ -39,9 +35,8 @@ const detailAmendement = ref({
     JUSTIFICATION: "",
     RISQUE: "",
     ADMIN: "",
-    PORT: currUser.value._value.email,
+    PORT: "",
     FINALISE: true,
-    user_id: currUser.value._value.id
 });
 
 const sendMessage = async () => {
@@ -104,6 +99,9 @@ const sendMessage = async () => {
                             <label for="FALSE" value="false" @click="detailAmendement.FINALISE=false">Non</label>
                             <input type="radio" name="FINALISE">
                         </div>
+
+                        <label for="PORT">Porteur·euse de l'amendement*</label>
+                        <input type="text" name="" id="PORT" v-model="detailAmendement.PORT" placeholder="Saisissez votre nom et votre email." />
 
                         <p><small>* Champs obligatoires</small></p>
                         <button :disabled="detailAmendement.TITRE_AMEND ? false:true">

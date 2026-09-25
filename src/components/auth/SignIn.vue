@@ -2,47 +2,11 @@
 import { ref } from 'vue'
 import { supabase } from '../../supabase.js'
 
-const email = ref('')
-const loading = ref(false)
 const error = ref('')
-const errorAdd = ref('')
-const success = ref(false)
 const loadingAnon = ref(false)
-
-async function signIn() {
-  error.value = ''
-  success.value = false
-
-  if (!email.value) {
-    error.value = 'Veuillez renseigner votre adresse email.'
-    return
-  }
-
-  loading.value = true
-
-  try {
-    const { error: otpError } = await supabase.auth.signInWithOtp({
-      email: email.value.trim(),
-      options: {
-        emailRedirectTo: window.location.origin
-      }
-    })
-
-    if (otpError) {
-      error.value = otpError.message
-      errorAdd.value = "Veuillez réessayer dans une heure."
-      return
-    }
-
-    success.value = true
-  } finally {
-    loading.value = false
-  }
-}
 
 async function anonVisit() {
   error.value = ''
-  errorAdd.value = ''
   loadingAnon.value = true
 
   try {
@@ -59,7 +23,6 @@ async function anonVisit() {
 
     if (anonError) {
       error.value = 'Impossible de continuer sans connexion.'
-      console.error(anonError)
       return
     }
 
@@ -73,45 +36,17 @@ async function anonVisit() {
 
 <template>
   <section class="auth-container">
-    <h1>Se connecter</h1>
-
-    <form @submit.prevent="signIn">
-      <div>
-        <label for="email">Email</label>
-
-        <input
-          id="email"
-          v-model="email"
-          type="email"
-          autocomplete="email"
-          required
-        />
-      </div>
-
-      <p v-if="error" class="error" style="color:red">
-        {{ error }} : {{ errorAdd }}
-      </p>
-
-      <p v-if="success" class="success">
-        Un email de confirmation vient de vous être envoyé.
-      </p>
-
-      <button
-        type="submit"
-        :disabled="loading"
-      >
-        {{ loading ? 'Création...' : 'Recevoir le lien de confirmation' }}
-      </button>
-    </form>
-    <p class="SignAnon" @click="anonVisit">Visiter sans connexion</p>
+    <button class="SignAnon primary" @click="anonVisit">Voir les amendements</button>
   </section>
 </template>
 
 
 <style scoped>
   .auth-container {
-    max-width: 30%;
-    margin: 0 auto;
+    margin-top: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .SignAnon:hover {

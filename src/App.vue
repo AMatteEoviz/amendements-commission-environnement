@@ -8,7 +8,6 @@ import Header from './components/header.vue';
 // Gestion de la session
 import { useAuth } from './composables/useAuth.js';
 import SignIn from './components/auth/SignIn.vue'
-import sessionManager from './components/auth/sessionManager.vue';
 
 const {
   session,
@@ -31,8 +30,6 @@ onMounted(async () => {
   </div>
   <div v-else-if="session">
     <scenarioContainer />
-    <sessionManager />
-
   </div>
   <div v-else>
     <SignIn />
