@@ -5,6 +5,7 @@ import { supabase } from '../../supabase.js'
 const email = ref('')
 const loading = ref(false)
 const error = ref('')
+const errorAdd = ref('')
 const success = ref(false)
 
 async function signIn() {
@@ -28,6 +29,7 @@ async function signIn() {
 
     if (otpError) {
       error.value = otpError.message
+      errorAdd.value = "Veuillez réessayer dans une heure."
       return
     }
 
@@ -57,7 +59,7 @@ async function signIn() {
       </div>
 
       <p v-if="error" class="error" style="color:red">
-        {{ error }}
+        {{ error }} : {{ errorAdd }}
       </p>
 
       <p v-if="success" class="success">
