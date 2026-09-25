@@ -30,7 +30,8 @@
                         <label :for="`modal-control_${amendement.id}`" class="modal-close"></label>
                         <h3>{{ amendement.TITRE_AMEND }}</h3>
                         <div class="amend-content">
-                            <p>{{ amendement.TEXTE_AMEND }}</p>
+                            <p v-if="amendement.TEXTE_AMEND">{{ amendement.TEXTE_AMEND }}</p>
+                            <p v-else class="amendTextPlaceHolder"><i>Pas de texte renseigné pour cet amendement.</i></p>
                         </div>
                         <table class="amend-metas">
                             <tbody>
@@ -117,6 +118,7 @@
     }
 
     .modal-card {
+        cursor: default;
         width: 75%;
         max-width: calc(100vw - 2rem);
         min-height: 70%;
@@ -152,6 +154,10 @@
     .amend-metas td:last-child {
         max-width: 75%;
         overflow-wrap: anywhere;
+    }
+
+    .amendTextPlaceHolder {
+        color: rgb(143, 143, 143)
     }
 
 </style>
