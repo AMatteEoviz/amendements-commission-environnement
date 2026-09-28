@@ -11,20 +11,6 @@ const props = defineProps({
     }
 });
 
-let choix_NAT_AMEND;
-
-if(props.scenario.SCENARIO_CODE !== 0) {
-    choix_NAT_AMEND = [
-    "Créer un nouveau sous-scénario",
-    "Modifier un sous-scénario existant",
-    "Amendement qui s'applique à tout le scénario",
-    ]
-} else {
-    choix_NAT_AMEND = [
-        "Création ou suppression de scénario (choix unique)"
-    ]
-};
-
 const detailAmendement = ref({
     TITRE_AMEND: "",
     NAT_AMEND: "",
@@ -36,6 +22,16 @@ const detailAmendement = ref({
     PORT: "",
     FINALISE: true,
 });
+
+let choix_NAT_AMEND;
+
+if(props.scenario.SCENARIO_CODE !== 0) {
+    choix_NAT_AMEND = [
+    "Créer un nouveau sous-scénario",
+    "Modifier un sous-scénario existant",
+    "Amendement qui s'applique à tout le scénario",
+    ];
+};
 
 const champsManquants = computed(() => {
     if (
@@ -51,6 +47,10 @@ const champsManquants = computed(() => {
 });
 
 const sendMessage = async () => {
+
+    if(props.scenario.SCENARIO_CODE === 0) {
+        detailAmendement.value.NAT_AMEND = "Création ou suppression de scénario (choix unique)";
+    }
 
     const data = await sendToSupabase(
         'amendements',
@@ -85,9 +85,14 @@ const sendMessage = async () => {
                         <input type="text" name="" id="TITRE_AMEND" v-model="detailAmendement.TITRE_AMEND" placeholder="En une phrase courte, écrivez l'idée de l'amendement" />
 
                         <label for="NATURE_AMEND">Nature de l'amendement*</label>
-                        <select :disabled="scenario.SCENARIO_CODE===0 ? true:false" id="NAT_AMEND" v-model="detailAmendement.NAT_AMEND">
-                            <option value="">Spécifiez la nature de l'amendement.</option>
-                            <option v-for="choix in choix_NAT_AMEND" :value="choix">{{ choix }}</option>
+                        <select :disabled="scenario.SCENARIO_CODE===0" id="NAT_AMEND" v-model="detailAmendement.NAT_AMEND">
+                            <template  v-if="scenario.SCENARIO_CODE!==0">
+                                <option value="">Spécifiez la nature de l'amendement.</option>
+                                <option v-for="choix in choix_NAT_AMEND" :value="choix">{{ choix }}</option>
+                            </template>
+                            <template v-else>
+                                <option value="">Création ou suppression de scénario (choix unique)</option>
+                            </template>
                         </select>
 
                         <label for="TEXT_AMEND">Décrivez le contenu de l'amendement</label>
