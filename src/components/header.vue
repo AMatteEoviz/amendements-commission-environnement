@@ -5,7 +5,7 @@
      <br>
      <div id="pres">
         <p>Ici, vous pouvez déposer une proposition d'amendement pour les scénarios qui seront soumis au vote de l'AG, ou bien consulter les amendements déjà déposés.</p>
-        <p>Tous les amendements seront soumis au vote en présentiel lors de la réunion du <strong style="color: #4dabf7;">13 novembre</strong> pour finaliser les scénarios transmis à l'AG.</p>
+        <p>Tous les amendements seront soumis au vote en présentiel lors d'une réunion prochaine dont la date sera annoncée en avance (selon l'évolution de la situation sur le campus du Mirail) pour finaliser les scénarios transmis à l'AG.</p>
         <p>Vous pouvez proposer deux types d'amendement : </p>
         <ul>
             <li>un remaniement de la structure en trois scénarios ;</li>
